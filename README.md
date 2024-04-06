@@ -1,8 +1,6 @@
 # s3 set content type
 
 a small program to set the content type of an object in a s3 compatible bucket using as few api calls as possible (1) -- tested on backblaze.
-
-
 ## getting started
 
 ``` bash
@@ -23,3 +21,8 @@ OBJECTKEY='<s3-key>'
 echo 'some_ebook.epub' | s3_setct
 One or more environment variables not set
 ```
+
+<!-- LocalWords: contenttype Content-Type s3 object storage backblaze
+     LocalWords: PUT POST REPLACE in place
+     LocalWords: Github readme
+ -->
