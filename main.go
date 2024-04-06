@@ -4,7 +4,6 @@ import (
 	"bufio"
 	"errors"
 	"fmt"
-	"log"
 	"os"
 	"strings"
 
@@ -54,7 +53,8 @@ func readStdIn() ([]byte, error) {
 			stdin = append(stdin, scanner.Bytes()...)
 		}
 		if err := scanner.Err(); err != nil {
-			log.Fatal(err)
+			fmt.Println(err)
+			os.Exit(1)
 		}
 		return stdin, nil
 	}
