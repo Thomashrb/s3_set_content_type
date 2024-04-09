@@ -14,8 +14,7 @@ import (
 )
 
 var (
-	objectName string
-
+	objectName   string
 	objectBucket string
 	objectType   string
 	objectUri    string
@@ -61,7 +60,7 @@ func readStdIn() ([]byte, error) {
 	return nil, errors.New("Expected stdin")
 }
 
-func main() {
+func loadEnv() error {
 	objectBucket, _ = os.LookupEnv("OBJECTBUCKET")
 	objectType, _ = os.LookupEnv("OBJECTTYPE")
 	objectUri, _ = os.LookupEnv("OBJECTURI")
@@ -71,10 +70,19 @@ func main() {
 
 	for _, s := range []string{objectBucket, objectType, objectUri, objectRegion, objectKeyId, objectKey} {
 		if s == "" {
-			fmt.Print(helpText)
-			fmt.Print("One or more environment variables not set")
-			os.Exit(1)
+			return fmt.Errorf("One or more environment variables not set")
 		}
+	}
+
+	return nil
+}
+
+func main() {
+	err := loadEnv()
+	if err != nil {
+		fmt.Print(helpText)
+		fmt.Printf("%s\n", err)
+		os.Exit(1)
 	}
 
 	stdin, err := readStdIn()
